@@ -1,0 +1,30 @@
+{% extends 'djangobasicsapp/layout.html' %}
+
+{% block title %} If Template Tag Demo {% endblock %}
+{% block body_block %}
+<div class="bg-info p-2 mt-1">
+  {% if data.logged_in %}
+
+    <h1>Hi {{ data.name }}!, You are logged in Currently!</h1>
+
+  {%  else %}
+    <h1>You are browing our site as a Guest!</h1>
+  {% endif %}
+</div>
+
+<div class="bg-info p-2 mt-1">
+  {% if data.logged_in %}
+
+    <h1>Hi {{ data.name }}!, You are logged in Currently!</h1>
+
+  {%  else %}
+    <h1>You are browing our site as a Guest! Please Login!</h1>
+  {% endif %}
+</div>
+
+<div class="bg-info p-2 mt-1">
+  {% if data.name == 'James Anderson' %}
+    <h1>Hey {{ data.name }}! You are also part of our elite players list.</h1>
+  {% endif %}
+</div>
+{% endblock %}

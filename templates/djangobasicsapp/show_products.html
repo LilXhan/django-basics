@@ -1,0 +1,36 @@
+{% extends 'djangobasicsapp/layout.html' %}
+
+{% block title %}Show Products {% endblock %}
+{% block body_block %}
+<h1>Total products: {{ total_products }}</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <td>Product Id</td>
+      <td>Product Name</td>
+      <td>Quantity</td>
+      <td>Units In Stock</td>
+      <td>DisContinued</td>
+      <td>Cost</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+      <tr>
+        <td>{{ product.product_id }}</td>
+        <td>{{ product.product_name }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.units_in_stock }}</td>
+        <td>{{ product.discontinued }}</td>
+        <td>{{ product.cost }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="form-group m-2">
+  <label>Product ID</label>
+  <input class="form-control" type="text" value="{{ products.1.product_id }}">
+  <label>Product Name</label>
+  <input class="form-control" type="text" value="{{ products.1.product_name }}">
+</div>
+{% endblock %}

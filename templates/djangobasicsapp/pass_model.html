@@ -1,0 +1,26 @@
+{% extends 'djangobasicsapp/layout.html' %}
+{% block title %}Pass Model{% endblock %}
+{% block body_block %}
+
+<ul>
+  <li>{{ author.author_name }}</li>
+  <li>{{ author.country }}</li>
+  <li>{{ author.book_name }}</li>
+</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Author Name</th>
+      <th>Country</th>
+      <th>Book Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for author in authors %}
+      {% include 'djangobasicsapp/_show_authors_partial_view.html' with author=author %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

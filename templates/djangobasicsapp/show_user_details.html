@@ -1,0 +1,78 @@
+{% extends 'djangobasicsapp/layout.html' %}
+{% block title %} User Details {% endblock %}
+{% block body_block %}
+
+<div class="container-fluid">
+  <div class="row">
+    <h2>User Details</h2>
+    <div class="col-6">
+      <div class="card w-75 p-2">
+        <div class="card-header" style="height: 300px;">
+          <p><b>User Name: {{ user.username }}</b></p>
+          <img src="{{ image }}" class="card-img-top" height="200">
+        </div>
+        <div class="card-body">
+          <dl>
+            <dt>First Name</dt>
+            <dd>{{ user.name.firstname }}</dd>
+            <dt>Last Name</dt>
+            <dd>{{ user.name.lastname }}</dd>
+            <dt>Email</dt>
+            <dd>{{ user.email }}</dd>
+          </dl>
+        </div>
+        <div class="card-footer">
+          <form method="post" action="{% url 'ShowUsersDetails' %}">
+            {% csrf_token %}
+            <input type="hidden" name="useridcounter" value="{{ user.id }}">
+            <button type="submit" name="btnNext" value="Next" class="btn btn-danger btn-sm">
+              <span class="bi bi-chevron-right"></span>Next User
+            </button>
+            <button type="submit" name="btnPrevious" value="Previous" class="btn btn-danger me-2">
+              <span class="bi bi-chevron-left"></span>Previous User
+            </button>
+
+            <br/>
+
+            <input type="checkbox" class="form-check-input" id="chkShowHide" onclick="toggleAll()" /> 
+            <label id="lblShowHide" for="chkShowHide">Show Address Details</label>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <h2>Address Details</h2>
+      <div class="card w-50 p-2" id="AddressDetails-{{user.id}}" style="display: none;">
+        <div class="card-header" style="height: 100px;">
+          <p><b>City: {{ user.address.city }}</b></p>
+        </div>
+        <div class="card-body">
+          <dt>Street</dt>
+          <dd>{{ user.address.street }}</dd>
+          <dt>Street Number</dt>
+          <dd>{{ user.address.number }}</dd>
+          <dt>Zip code</dt>
+          <dd>{{ user.address.zipcode }}</dd>
+          <dt>Geo Location Latitude</dt>
+          <dd>{{ user.address.geolocation.lat }}</dd>
+          <dt>Geo location Longitude</dt>
+          <dd>{{ user.address.geolocation.long }}</dd>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleAll() {
+    $('div[id*="AddressDetails-"]').toggle();
+
+    if($("#lblShowHide").text() == "Hide Address Details")
+      $("#lblShowHide").text("Show Address Details")
+    else
+      $("#lblShowHide").text("Hide Address Details")
+  }
+</script>
+
+{% endblock %}
